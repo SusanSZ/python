@@ -58,7 +58,7 @@ def hotel_info(id):
     #   for i in cmts:
     #       comment=i.text
     #       comments.append(comment)
-    print(name,',',aver_price,',',star,',',',',',',adress)
+    print(name.encode('gb2312'),','.encode('gb2312'),aver_price.encode('gb2312'),','.encode('gb2312'),star.encode('gb2312'),',',',',',',adress.encode('gb2312'))
     #div1=f1.find_all('div',id='base_bd')[0].find_all('div',class_='main_detail_wrapper ')[0]
     #div2=div1.find_all('div',itemtype='//schema.org/Hotel')[0]
     #name=div2.h2.get_text()
@@ -88,7 +88,7 @@ for(i=0;i<p.length;i++){
         if(p[i]) p[i].setAttribute('class','J_commentDetail');
 }""")
         cmts=driver.find_elements_by_xpath("//div[@class='J_commentDetail']")
-        print(len(cmts))
+      #  print(len(cmts))
         psnstars=driver.find_elements_by_xpath("//div[@class='comment_main']//span[@class='score']//span[@class='n']")
         j=0
         for i in range(len(cmts)):
@@ -100,11 +100,11 @@ for(i=0;i<p.length;i++){
             comment=cmts[i].text
             comment=comment.replace(',','，')
             #comments.append(comment)
-            print(',',',',psnstar,',',comment)
+            print(',',',',psnstar.encode('gb2312'),',',comment.encode('gb2312'))
         driver.quit()
     #print(comments)
 
-print('酒店名称,平均价格,总评分,评分，评论,地址')
+print('酒店名称,平均价格,总评分,评分，评论,地址'.encode('gb2312'))
 for pg in range(1,20,2):
     hotel_list=list_hotel(pg)
     for item in hotel_list:
