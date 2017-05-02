@@ -10,9 +10,13 @@ from selenium import webdriver
 import time
 import sys
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
-print(sys.getdefaultencoding())
+driver=webdriver.Chrome()
+driver.maximize_window()
+driver.implicitly_wait(30)
+
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
+#print(sys.getdefaultencoding())
 
 def list_hotel(pg):
     r = requests.get(url='http://hotels.ctrip.com/hotel/hangzhou17/p%d' % pg)
@@ -34,9 +38,7 @@ def list_hotel(pg):
 #print(item.prettify())
 
 def hotel_info(id):
-    driver=webdriver.Chrome()
-    driver.maximize_window()
-    driver.implicitly_wait(30)
+    global driver
     url="http://hotels.ctrip.com/hotel/dianping/%s.html" % id
     driver.get(url)
     time.sleep(5)
@@ -75,14 +77,11 @@ def hotel_info(id):
     #for i in price_list:
     #    print(i.prettify())
     #div2=div1.find_all()
-    driver.quit()
+    #driver.quit()
 
 def cmtpgs(id):
     #comments=[]
     for i in range(1,150,2):
-        driver=webdriver.Chrome()
-        driver.maximize_window()
-        driver.implicitly_wait(30)
         url="http://hotels.ctrip.com//hotel/dianping/%s_p%dt0.html" % (id,i)
         driver.get(url)
         time.sleep(5)
@@ -113,7 +112,7 @@ for(i=0;i<p.length;i++){
                 print(',',',',psnstar,',',comment)
             except:
                 print('空')
-        driver.quit()
+        #driver.quit()
     #print(comments)
 
 print('酒店名称,平均价格,总评分,评分，评论,地址')
