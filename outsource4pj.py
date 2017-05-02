@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 import urllib.request
 import time
+import sys
 
 def list_hotel(pg):
     r = requests.get(url='http://hotels.ctrip.com/hotel/hangzhou17/p%d' % pg)
@@ -58,7 +59,10 @@ def hotel_info(id):
     #   for i in cmts:
     #       comment=i.text
     #       comments.append(comment)
-    print(name.encode('gb2312'),','.encode('gb2312'),aver_price.encode('gb2312'),','.encode('gb2312'),star.encode('gb2312'),',',',',',',adress.encode('gb2312'))
+    try:
+        print(name,',' ,aver_price,',' ,star,',',',',',',adress)
+    except:
+        print('空')
     #div1=f1.find_all('div',id='base_bd')[0].find_all('div',class_='main_detail_wrapper ')[0]
     #div2=div1.find_all('div',itemtype='//schema.org/Hotel')[0]
     #name=div2.h2.get_text()
@@ -100,16 +104,22 @@ for(i=0;i<p.length;i++){
             comment=cmts[i].text
             comment=comment.replace(',','，')
             #comments.append(comment)
-            print(',',',',psnstar.encode('gb2312'),',',comment.encode('gb2312'))
+            try:
+                print(',',',',psnstar,',',comment)
+            except:
+                print('空')
         driver.quit()
     #print(comments)
 
-print('酒店名称,平均价格,总评分,评分，评论,地址'.encode('gb2312'))
-for pg in range(1,20,2):
-    hotel_list=list_hotel(pg)
-    for item in hotel_list:
+print('酒店名称,平均价格,总评分,评分，评论,地址')
+pg = int(sys.argv[1])
+hotel_list=list_hotel(pg)
+for item in hotel_list:
+    try:
         hotel_info(item)
         cmtpgs(item)
-        
-        """break
-    break"""
+    except:
+        print("error")
+        pass        
+    """break
+break"""
