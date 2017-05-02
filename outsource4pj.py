@@ -7,9 +7,12 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
-import urllib.request
 import time
 import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+print(sys.getdefaultencoding())
 
 def list_hotel(pg):
     r = requests.get(url='http://hotels.ctrip.com/hotel/hangzhou17/p%d' % pg)
